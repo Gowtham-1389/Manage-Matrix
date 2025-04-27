@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Management - MANAGE MATRIX</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Sticky Footer Styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header class="bg-primary text-white text-center py-4">
+            <h1>Events Management</h1>
+        </header>
+
+        <div class="container my-5 content">
+            <form id="eventForm" action="/add_event" method="post">
+                <div class="mb-3">
+                    <label for="event_name" class="form-label">Event Name</label>
+                    <input type="text" class="form-control" id="event_name" name="event_name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="event_date" class="form-label">Event Date</label>
+                    <input type="date" class="form-control" id="event_date" name="event_date" required>
+                </div>
+                <div class="mb-3">
+                    
+                    <label for="location" class="form-label">Location</label>
+                    <select class="form-control" id="location" name="location" required>
+                        <option value="Amaravati">Amaravati</option> 
+                        <option value="Banglore">Banglore</option>
+                        <option value="Chennai">Chennai</option>
+                        <option value="Delhi">Delhi</option>
+                        <option value="Hyderabad">Hyderabad</option>
+                        <option value="Mumbai">Mumbai</option>
+                        <option value="Pune">Pune</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="attendees" class="form-label">Attendees</label>
+                    <input type="text" class="form-control" id="attendees" name="attendees" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Add Event</button>
+            </form>
+        </div>
+
+        <!-- Home Button -->
+        <div class="text-center my-4">
+            <a href="/" class="btn btn-secondary">Home</a>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <p>&copy; 2025 Business Management Platform</p>
+        </footer>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title" id="successModalLabel">Booking Successful</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Event Name:</strong> <span id="modalEventName"></span></p>
+                    <p><strong>Event Date:</strong> <span id="modalEventDate"></span></p>
+                    <p><strong>Location:</strong> <span id="modalLocation"></span></p>
+                    <p><strong>Attendees:</strong> <span id="modalAttendees"></span></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Handle form submission
+        document.getElementById('eventForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            const eventName = document.getElementById('event_name').value;
+            const eventDate = document.getElementById('event_date').value;
+            const location = document.getElementById('location').value;
+            const attendees = document.getElementById('attendees').value;
+
+            // Set modal content
+            document.getElementById('modalEventName').textContent = eventName;
+            document.getElementById('modalEventDate').textContent = eventDate;
+            document.getElementById('modalLocation').textContent = location;
+            document.getElementById('modalAttendees').textContent = attendees;
+
+            // Show the modal
+            const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+
+            // Optionally, submit the form data to the server using AJAX
+            const formData = new FormData(this);
+            fetch('/add_event', {
+                method: 'POST',
+                body: formData
+            }).then(response => {
+                if (response.ok) {
+                    console.log('Event added successfully');
+                } else {
+                    console.error('Error adding event');
+                }
+            }).catch(error => {
+                console.error('Error:', error);
+            });
+        });
+    </script>
+</body>
+</html>

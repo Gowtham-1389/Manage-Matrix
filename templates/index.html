@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MANAGE MATRIX - Home</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* Sticky Footer Styles */
+        html, body {
+            height: 100%;
+            margin: 0;
+        }
+        .wrapper {
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .content {
+            flex: 1;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+
+        /* Custom Styles for Services */
+        .service-card {
+            margin: 15px; /* Add margin around each card */
+            transition: transform 0.3s ease, box-shadow 0.3s ease; /* Add hover effect */
+        }
+        .service-card:hover {
+            transform: translateY(-5px); /* Lift the card slightly on hover */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+        }
+        .service-card img {
+            height: 150px; /* Set a fixed height for images */
+            object-fit: cover; /* Ensure images cover the area */
+        }
+        .service-card .card-body {
+            text-align: center; /* Center-align text */
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <!-- Header -->
+        <header class="bg-primary text-white text-center py-4">
+            <h1 class="animate__animated animate__fadeInDown">MANAGE MATRIX</h1>
+            <p class="lead animate__animated animate__fadeInUp">A Business Management Platform</p>
+        </header>
+
+        <!-- Services Section -->
+        <div class="container my-5 content">
+            <div class="row justify-content-center">
+                <!-- Sales Forecasting -->
+                <div class="col-md-5 animate__animated animate__fadeInLeft">
+                    <a href="/sales_forecasting" class="text-decoration-none">
+                        <div class="card shadow-lg service-card">
+                            <img src="{{ url_for('static', filename='images/sales.png') }}" class="card-img-top" alt="Sales Forecasting">
+                            <div class="card-body">
+                                <h5 class="card-title">Sales Forecasting</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Inventory Management -->
+                <div class="col-md-5 animate__animated animate__fadeInRight">
+                    <a href="/inventory_management" class="text-decoration-none">
+                        <div class="card shadow-lg service-card">
+                            <img src="{{ url_for('static', filename='images/inventory.png') }}" class="card-img-top" alt="Inventory Management">
+                            <div class="card-body">
+                                <h5 class="card-title">Inventory Management</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row justify-content-center mt-4">
+                <!-- Shipping Cost Prediction -->
+                <div class="col-md-5 animate__animated animate__fadeInLeft">
+                    <a href="/shipping_cost" class="text-decoration-none">
+                        <div class="card shadow-lg service-card">
+                            <img src="{{ url_for('static', filename='images/shipping.png') }}" class="card-img-top" alt="Shipping Cost Prediction">
+                            <div class="card-body">
+                                <h5 class="card-title">Shipping Cost Prediction</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Events Management -->
+                <div class="col-md-5 animate__animated animate__fadeInRight">
+                    <a href="/events_management" class="text-decoration-none">
+                        <div class="card shadow-lg service-card">
+                            <img src="{{ url_for('static', filename='images/events.png') }}" class="card-img-top" alt="Events Management">
+                            <div class="card-body">
+                                <h5 class="card-title">Events Management</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white text-center py-3">
+            <p>&copy; 2025 Business Management Platform.</p>
+        </footer>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
